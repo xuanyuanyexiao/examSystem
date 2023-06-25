@@ -1,4 +1,5 @@
 import time
+import random
 
 score = 0
 wrong_questions = []  # 错题列表
@@ -1143,5 +1144,37 @@ def review_wrong_questions():
         review_wrong_questions()
 
 
+def random_quiz():
+    global score
+    random.shuffle(questions)
+
+    print("欢迎使用马克思主义原理概论选择题科目一式刷题系统")
+    print("请注意，只有将题目全部选择正确，程序才会停止，否则从头开始！")
+    print("ps:多选题请按字母顺序选择")
+
+    for i, question in enumerate(questions):
+        print("第", i + 1, "题")
+        display_question(question)
+        user_answer = input("请输入您的答案：")
+        check_answer(question, user_answer.upper())
+
+        if score == len(questions):
+            break
+        else:
+            score = 0
+
+    print("您本轮的最终成绩为：", score)
+    if score == len(questions):
+        print('恭喜您选择题全对，程序将在5秒后退出，祝您考试顺利')
+        time.sleep(5)
+    else:
+        review_wrong_questions()
+
+
 if __name__ == '__main__':
-    start()
+    print("请问您是否需要题目随机出现，如果需要，请输入1，不需要则输入其他任意按键")
+    ob = int(input("需要吗？"))
+    if ob == 1:
+        random_quiz()
+    elif ob == 2:
+        start()

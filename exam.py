@@ -1141,17 +1141,12 @@ def random_quiz():
         display_question(question)
         user_answer = input("请输入您的答案：")
         check_answer(question, user_answer.upper())
-
-        if score == len(questions):
-            break
-        else:
-            score = 0
-
     print("您本轮的最终成绩为：", score)
     if score == len(questions):
         print('恭喜您选择题全对，程序将在5秒后退出，祝您考试顺利')
         time.sleep(5)
     else:
+        score = 0
         review_wrong_questions()
 
 
